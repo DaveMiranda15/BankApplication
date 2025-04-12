@@ -128,3 +128,35 @@ public class BankAppTemplate {
         return DriverManager.getConnection("jdbc:h2:" + FileUtility.home() + "db;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE", username, password);
     }
 }
+
+
+# Adding contribution to banking system
+
+class BankAccount:
+    def __init__(self, account_number, account_holder):
+        self.account_number = account_number
+        self.account_holder = account_holder
+        self.balance = 0.0
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited ${amount:.2f}. New balance: ${self.balance:.2f}")
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.balance:
+            self.balance -= amount
+            print(f"Withdrew ${amount:.2f}. New balance: ${self.balance:.2f}")
+        else:
+            print("Insufficient funds or invalid amount.")
+
+    def check_balance(self):
+        print(f"Account balance: ${self.balance:.2f}")
+
+# Example usage:
+account = BankAccount("123456789", "John Doe")
+account.deposit(1000)
+account.withdraw(500)
+account.check_balance()
